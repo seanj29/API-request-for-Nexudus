@@ -1,6 +1,16 @@
 import axios from "axios";
 const apiurl = "https://spaces.nexudus.com/api";
-const ProdName = "10 hours";
+const username = prompt("Username");
+const password = prompt("Password");
+const auth = "Basic " + Buffer.from(username + ":" + password, "base64");
+const ProdName = prompt("Name For Product you wish to sell");
+const options = {
+    headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        authorization: auth,
+    },
+};
 const ProdData = {
     Tariffs: [0],
     Description: "Product Description",
@@ -15,21 +25,14 @@ const ProdData = {
     FinancialAccountId: 0,
     AvailableAs: "RecurrentOrOneOff",
 };
-const CustomerEmail = "kekexow443@larland.com";
+const CustomerEmail = prompt("Customer Email");
 
 async function checkProductExists(product) {
     const url =
         apiurl +
         "/billing/products?Product_Name=" +
         encodeURIComponent(product.Name);
-    const options = {
-        headers: {
-            accept: "application/json",
-            "content-type": "application/json",
-            authorization:
-               //API Key or login go here, I'm removing my version just in case,
-        },
-    };
+
     const response = await axios.get(url, options).catch((error) => {
         console.log(error);
     });
@@ -45,12 +48,6 @@ async function locateCustomerByEmail(email) {
         apiurl +
         "/spaces/coworkers?Coworker_Email=" +
         encodeURIComponent(email);
-    const options = {
-        headers: {
-            authorization:
-                "Bearer Rrm19XoBDEB6GEcxiUFxL5OIl5_CeMQ1t1gsAFJ6T3AZwqHH4VwkS8Kq9_yPibCMprYtMou6tHnZuMnWmT6wazu_-Mgy-xRuONIFSscM67lQ-QBnQy4u7FJkcW6HkCVrNUkT6iy4LPcbZGPpx1fZpAKOqGwCNqM0R6f2eFHTSvMxv3JSIhRJhI6iqx7UCSoEO6sd9EVpOMXxdWirQ_dMbJn5I9yzqrIEoLjfRpKv7wInGocgobqA59eToPJ1ds0rf-GSxVA2h94YCtArOSZnZVoJFV4ZkghsKdI_E4YU48_u6Y6d9xtQrzJPiCw80YmbnKT5Ko6DmiVSY1gueGqUDkF-iMs",
-        },
-    };
     const response = await axios.get(url, options);
     if (response.data.Records?.length) {
         return response.data.Records[0];
@@ -62,14 +59,6 @@ async function locateCustomerByEmail(email) {
 async function createProduct(product) {
     const url = apiurl + "/billing/products";
     const data = product;
-    const options = {
-        headers: {
-            accept: "application/json",
-            "content-type": "application/json",
-            authorization:
-                "Bearer Rrm19XoBDEB6GEcxiUFxL5OIl5_CeMQ1t1gsAFJ6T3AZwqHH4VwkS8Kq9_yPibCMprYtMou6tHnZuMnWmT6wazu_-Mgy-xRuONIFSscM67lQ-QBnQy4u7FJkcW6HkCVrNUkT6iy4LPcbZGPpx1fZpAKOqGwCNqM0R6f2eFHTSvMxv3JSIhRJhI6iqx7UCSoEO6sd9EVpOMXxdWirQ_dMbJn5I9yzqrIEoLjfRpKv7wInGocgobqA59eToPJ1ds0rf-GSxVA2h94YCtArOSZnZVoJFV4ZkghsKdI_E4YU48_u6Y6d9xtQrzJPiCw80YmbnKT5Ko6DmiVSY1gueGqUDkF-iMs",
-        },
-    };
     const response = await axios.post(url, data, options);
     return response.data.Value;
 }
@@ -82,16 +71,6 @@ async function sellProduct(ProductNo, CoworkerNo) {
         ProductId: ProductNo,
         Quantity: 1,
         RepeatCycle: "PricePlan",
-    };
-    console.log(CoworkerNo);
-    console.log(ProductNo);
-    const options = {
-        headers: {
-            accept: "application/json",
-            "content-type": "application/json",
-            authorization:
-                "Bearer Rrm19XoBDEB6GEcxiUFxL5OIl5_CeMQ1t1gsAFJ6T3AZwqHH4VwkS8Kq9_yPibCMprYtMou6tHnZuMnWmT6wazu_-Mgy-xRuONIFSscM67lQ-QBnQy4u7FJkcW6HkCVrNUkT6iy4LPcbZGPpx1fZpAKOqGwCNqM0R6f2eFHTSvMxv3JSIhRJhI6iqx7UCSoEO6sd9EVpOMXxdWirQ_dMbJn5I9yzqrIEoLjfRpKv7wInGocgobqA59eToPJ1ds0rf-GSxVA2h94YCtArOSZnZVoJFV4ZkghsKdI_E4YU48_u6Y6d9xtQrzJPiCw80YmbnKT5Ko6DmiVSY1gueGqUDkF-iMs",
-        },
     };
     const response = await axios.post(url, data, options);
     return response.status;
