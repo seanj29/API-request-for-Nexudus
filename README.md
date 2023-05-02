@@ -1,2 +1,2 @@
 # API-request-for-Nexudus
-I haven't looked into encrypting api keys yet, so I'm setting this repo to private til I can figure it out
+Everything necesarry should be in the Request.js file. It uses the axios libary to make HTTP requests due to the increased saftey the libary provides as opposed to standard js fetch.
