@@ -27,7 +27,7 @@ async function checkProductExists(product) {
             accept: "application/json",
             "content-type": "application/json",
             authorization:
-                "Bearer Rrm19XoBDEB6GEcxiUFxL5OIl5_CeMQ1t1gsAFJ6T3AZwqHH4VwkS8Kq9_yPibCMprYtMou6tHnZuMnWmT6wazu_-Mgy-xRuONIFSscM67lQ-QBnQy4u7FJkcW6HkCVrNUkT6iy4LPcbZGPpx1fZpAKOqGwCNqM0R6f2eFHTSvMxv3JSIhRJhI6iqx7UCSoEO6sd9EVpOMXxdWirQ_dMbJn5I9yzqrIEoLjfRpKv7wInGocgobqA59eToPJ1ds0rf-GSxVA2h94YCtArOSZnZVoJFV4ZkghsKdI_E4YU48_u6Y6d9xtQrzJPiCw80YmbnKT5Ko6DmiVSY1gueGqUDkF-iMs",
+               //API Key or login go here, I'm removing my version just in case,
         },
     };
     const response = await axios.get(url, options).catch((error) => {
