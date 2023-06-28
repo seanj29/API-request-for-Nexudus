@@ -2,7 +2,7 @@ import axios from "axios";
 ;
 // const username = prompt("Username");
 // const password = prompt("Password");
-const auth = "Basic " + Buffer.from(username + ":" + password, "base64");
+// const auth = "Basic " + Buffer.from(username + ":" + password, "base64");
 const options = {
     headers: {
         accept: "application/json",
@@ -18,15 +18,12 @@ async function testspace(SpaceName) {
     const response = await axios.get(url, options).catch((error) => {
         console.log(error);
     });
-    if (response.data.Records?.length) {
-        return response.data.Records[0];
-    }
-
-    return false;
+    
+        console.log(response.data);
 }
 
 async function main() {
-    const response = await testspace("SeandeDemo");
+    const response = await testspace("Seandemo");
     if (response == 200) {
         console.log("Successfully Sold Product");
     }
