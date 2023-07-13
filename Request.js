@@ -1,31 +1,36 @@
 import axios from "axios";
-;
-// const username = prompt("Username");
-// const password = prompt("Password");
-// const auth = "Basic " + Buffer.from(username + ":" + password, "base64");
-const options = {
-    headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-    },
-}
 
-async function testspace(SpaceName) {
+async function testspace() {
     
-    const apiurl = `https://${SpaceName}.spaces.nexudus.com/en?_depth=1`
-    const url = apiurl;
+    const url = "https://core.spreedly.com/v1/gateways_options.json";
 
-    const response = await axios.get(url, options).catch((error) => {
+    const response = await axios.get(url).catch((error) => {
         console.log(error);
     });
     
-        console.log(response.data);
-}
+ 
+    if (response.status == 200) {
+    console.log("API Response obtained successfully");
+       const gateways =  response.data.gateways;
 
+       for (let i = 0; i <gateways.length; i++) {
+        let paymentmethods =  gateways[i].payment_methods;
+        console.info(`${gateways[i].name}
+
+Accepted Countries: ${gateways[i].supported_countries}
+  
+Payment_methods:`);
+        for (let j = 0; j < paymentmethods.length; j++){
+            console.info(`${paymentmethods[j]}`);
+        
+}
+console.info(`
+`)
+}
+}
+}
 async function main() {
-    const response = await testspace("Seandemo");
-    if (response == 200) {
-        console.log("Successfully Sold Product");
-    }
+    const response = await testspace();
+
 }
 main();
