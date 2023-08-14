@@ -8,20 +8,18 @@ async function testspace() {
         authorization: 'Bearer NDMN8z-my_6Sl8UT4kg9UdY2c3k8s8I6'
       }
 
-    const response = await axios.get(url, headers).catch((error) => {
-        console.log(error);
-    });
-    
- 
-    if (response.status == 200) {
-    console.log("API Response obtained successfully");
-       const data =  response.data
-    console.info(data)
-}
-}
-async function main() {
-    const response = await testspace();
+    const response = await axios
+    .get(url, headers)
+    .catch(err => {
+
+    console.error(err.info)})
+
+    .then((response) =>{
+
+    console.info(response)
+
+})
 
 }
-main();
+testspace();
 
