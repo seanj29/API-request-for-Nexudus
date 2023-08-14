@@ -2,31 +2,21 @@ import axios from "axios";
 
 async function testspace() {
     
-    const url = "https://core.spreedly.com/v1/gateways_options.json";
+    const url = "https://spaces.nexudus.com/api/apps/marketplaceApplications/feed?marketplace_id=f29c7517-543f-4aa2-a17b-2de4b24b9869n";
+    const headers = {
+        accept: 'application/json',
+        authorization: 'Bearer NDMN8z-my_6Sl8UT4kg9UdY2c3k8s8I6'
+      }
 
-    const response = await axios.get(url).catch((error) => {
+    const response = await axios.get(url, headers).catch((error) => {
         console.log(error);
     });
     
  
     if (response.status == 200) {
     console.log("API Response obtained successfully");
-       const gateways =  response.data.gateways;
-
-       for (let i = 0; i <gateways.length; i++) {
-        let paymentmethods =  gateways[i].payment_methods;
-        console.info(`${gateways[i].name}
-
-Accepted Countries: ${gateways[i].supported_countries}
-  
-Payment_methods:`);
-        for (let j = 0; j < paymentmethods.length; j++){
-            console.info(`${paymentmethods[j]}`);
-        
-}
-console.info(`
-`)
-}
+       const data =  response.data
+    console.info(data)
 }
 }
 async function main() {
@@ -34,3 +24,4 @@ async function main() {
 
 }
 main();
+
