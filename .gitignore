@@ -1,3 +1,4 @@
 /.vscode
-/GetRequestTest.js
+/node_modules
 /Testconversion.js
+.env
