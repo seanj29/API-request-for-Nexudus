@@ -14,7 +14,7 @@ async function testspace() {
     const response = await axios
     .get(url, options)
     .then((response) =>{
-        console.log(response);
+        console.log(response.data);
     })
     .then((err) =>{
         console.log(err);
