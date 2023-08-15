@@ -1,5 +1,5 @@
 import axios from "axios";
-import env from "env";
+import 'dotenv/config'
 
 async function testspace() {
     
