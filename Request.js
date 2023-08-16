@@ -3,20 +3,21 @@ import 'dotenv/config';
 
 async function testspace() {
     
-    const url = "https://spaces.nexudus.com/api/apps/marketplaceApplications/feed?marketplace_id=f29c7517-543f-4aa2-a17b-2de4b24b9869";
+    const url = "https://seandemo.spaces.nexudus.com/en/basket/previewInvoice";
     const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          authorization: process.env.API_TOKEN
+          'Content-Type': 'application/json',
+          body: process.env.BODY
         }
-      };
+        }
     const response = await axios
     .get(url, options)
     .then((response) =>{
-        console.log(response.data);
+        console.log(response.data[0]);
     })
-    .then((err) =>{
+    .catch((err) =>{
         console.log(err);
     })
 }
